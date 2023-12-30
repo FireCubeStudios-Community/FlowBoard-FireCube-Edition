@@ -18,6 +18,7 @@ using Windows.Graphics.Imaging;
 using Windows.Graphics.Display;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace FlowBoard.Helpers
 {
@@ -146,6 +147,24 @@ namespace FlowBoard.Helpers
         {
             var item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(fileName);
             return item != null;
+        }
+
+        public static async Task<string> GetSequentialNewWhiteboardFilename()
+        {
+            Regex rx = new Regex(@"(New Whiteboard$|New Whiteboard \(([0-9]+)\)$)");
+
+            int highestNumber = -1;
+            var items = await ApplicationData.Current.LocalFolder.GetItemsAsync();
+            foreach (var item in items)
+            {
+                foreach (Match match in rx.Matches(item.Name))
+                {
+                    highestNumber = match.Groups[2].Length == 0 ? 0 : int.Parse(match.Groups[2].Value);
+                }
+            }
+
+            string postfix = highestNumber < 0 ? "" : " (" + (highestNumber + 1).ToString() + ")";
+            return "New Whiteboard" + postfix;
         }
 
         // Save the project + add it to the most recently used list + get a preview image

@@ -42,13 +42,13 @@
                     <TextBlock FontSize="24" FontWeight="SemiBold" Margin="0, 0, 0, 12">New Project</TextBlock>
                     <TextBlock FontWeight="SemiBold">Project Name:</TextBlock>
                     <toolkit:DropShadowPanel ShadowOpacity="0.4" OffsetX="4" CornerRadius="8" Margin="0, 12, 0, 16" OffsetY="4">
-                        <TextBox x:Name="Name" Height="20" Width="340" PlaceholderText="New Project" Style="{ThemeResource GlowTextBox}"/>
+                        <TextBox x:Name="Name" Height="20" Width="340" PlaceholderText="New Whiteboard" Style="{ThemeResource GlowTextBox}"/>
                     </toolkit:DropShadowPanel>
                     <TextBlock FontWeight="SemiBold">Canvas Background:</TextBlock>
                     <controls:BackgroundSelectorControl x:Name="Backgrounds" SelectedIndex="0" Margin="8, 12, 0, 12"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <TextBlock x:Name="Status" Foreground="Red" Width="250" TextWrapping="WrapWholeWords" Margin="0, 0, 4, 0"/>
-                        <Button IsEnabled="{x:Bind helpers:UIHelper.TextToBool(Name.Text), Mode=OneWay}" Width="80" Click="CreateProject_Click">Create</Button>
+                        <Button Width="80" Click="CreateProject_Click">Create</Button>
                     </StackPanel>
                 </StackPanel>
             </Grid>
